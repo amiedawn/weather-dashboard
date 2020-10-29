@@ -1,0 +1,58 @@
+*{  /* tells every element on the page to not have a margin or border unless specified */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+body {
+  background-color: rgb(33, 145, 131);
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #515C55;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.jumbotron {
+  display: flex-block;
+  position: relative;
+  text-align: center;
+  background-color: #8793ee;
+  padding: 20px;
+}
+
+main {
+  margin: 20px auto;
+  width: 94%;
+}
+
+.card {
+  background-color: #cfd4f8;
+}
+
+.card-body {
+  padding: 10px;
+  margin: 15px;
+
+
+}
+
+.btn {
+  height: 20px;
+  width: 50px;
+  display: inline;
+  text-align: center;
+  
+}
+
+.search-line {
+  display: inline;
+  text-align: center;
+
+}
+
+.form-input {
+  display: inline;
+  text-align: left;
+}
