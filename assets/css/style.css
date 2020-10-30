@@ -9,8 +9,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #515C55;
-  line-height: 1.5;
+  color: black;
+  line-height: 1.5em;
   /*font-size: 16px; */
 }
 
@@ -18,7 +18,7 @@ body {
   display: flex-block;
   position: relative;
   text-align: center;
-  background-color: #8793ee;
+  background-color: #65187a;
   padding: 20px;
 }
 
@@ -28,7 +28,7 @@ main {
 }
 
 .card {
-  background-color: #cfd4f8;
+  background-color: #7851a9;
 }
 
 .card-header {
@@ -36,17 +36,23 @@ main {
   
 }
 
+
+
 .btn {
   width: 30%;
   display: inline;
   text-align: center;
+  line-height: 1.5em;
   font-size: 14px;
+  color: black;
   
 }
 
  .search-line {
   display: inline;
   text-align: center;
+  height: 1.5em; /*supposed to be same as hieght of the button to make text vertically centered*/
+
 
 } 
 
@@ -54,13 +60,21 @@ main {
   display: inline;
   text-align: left;
   width: 60%;
+  
 }
 
 .flex-row {
   display: inline-flex; /* make card next to the city search box */
 }
 
+.current-card {
+  border: solid;
+  padding: 20px;
+  border-color: #65187a;
+}
 .current-info { /*temp, humidity, wind, etc*/
   font-size: 15px;
-  color: white;
+  color: black;
+  line-height: 3em; /* spacing between output */
 }
+

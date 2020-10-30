@@ -35,12 +35,12 @@
           var today = moment().format("M/D/YYYY");
           var $subtitleDate = $("#currentDay");
 
-          $subtitleDate.text(today);
+          //$subtitleDate.text(today);
         
-          $(".city").html("<h1>" + data.name + " (" + $subtitleDate.text(today) + ")");
+          $(".city").html("<h1>" + data.name + " (" + today + ")");
           $(".temp").text("Temperature: " + data.main.temp + "° F");
           $(".humidity").text("Humidity: " + data.main.humidity + "%");
-          $(".wind").text("Wind Speed: " + data.wind.speed + "&units=imperial" + " MPH"); //**convert to imperial */
+          $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
         });
       } else {
         // if you try to search for a city that doesn't exist
