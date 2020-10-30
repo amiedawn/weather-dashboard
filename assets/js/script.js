@@ -37,7 +37,7 @@
 
           //$subtitleDate.text(today);
         
-          $(".city").html("<h1>" + data.name + " (" + today + ")");
+          $(".city").html("<h1>" + data.name + " (" + today + ")" + data.weather.icon + "</h1>");
           $(".temp").text("Temperature: " + data.main.temp + "° F");
           $(".humidity").text("Humidity: " + data.main.humidity + "%");
           $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
