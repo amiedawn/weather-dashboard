@@ -5,10 +5,10 @@ var cityContainerEl = document.querySelector("#city-container")
 //var cityInputEl = "San Diego";
 var apiKey = "fc812994b97935be7c26648fa44398a1";
 
-var collectWeatherInfo = function() {
+var collectWeatherInfo = function(city) {
 // format api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&appid=" + apiKey;
-debugger;
+var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+
 // make a request to the URL
 fetch(apiUrl)
   .then(function(response) {
@@ -31,7 +31,7 @@ var searchSubmitHandler = function(event) {
   event.preventDefault();
 
   // get value from input element
-  var city = cityInputEl.nodeValue.trim();
+  var city = cityInputEl.value.trim();
 
   if (city) {
     collectWeatherInfo(city);
@@ -43,10 +43,5 @@ var searchSubmitHandler = function(event) {
   console.log(event);
 };
 
-
-
-
-
-collectWeatherInfo();  
 
 inputSearchEl.addEventListener("submit", searchSubmitHandler);
