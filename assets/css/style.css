@@ -11,7 +11,7 @@ body {
   font-family: sans-serif;
   color: #515C55;
   line-height: 1.5;
-  font-size: 16px;
+  /*font-size: 16px; */
 }
 
 .jumbotron {
@@ -23,7 +23,7 @@ body {
 }
 
 main {
-  margin: 20px auto;
+  margin: 10px auto;
   width: 94%;
 }
 
@@ -31,28 +31,36 @@ main {
   background-color: #cfd4f8;
 }
 
-.card-body {
-  padding: 10px;
-  margin: 15px;
-
-
-}
-
-.btn {
-  height: 20px;
-  width: 50px;
-  display: inline;
-  text-align: center;
+.card-header {
+  padding: 0; /* keep border around "search for a city" small */
   
 }
 
-.search-line {
+.btn {
+  width: 30%;
+  display: inline;
+  text-align: center;
+  font-size: 14px;
+  
+}
+
+ .search-line {
   display: inline;
   text-align: center;
 
-}
+} 
 
 .form-input {
   display: inline;
   text-align: left;
+  width: 60%;
+}
+
+.flex-row {
+  display: inline-flex; /* make card next to the city search box */
+}
+
+.current-info { /*temp, humidity, wind, etc*/
+  font-size: 15px;
+  color: white;
 }
