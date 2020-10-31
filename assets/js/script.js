@@ -36,8 +36,12 @@
           var $subtitleDate = $("#currentDay");
 
           //$subtitleDate.text(today);
-        
-          $(".city").html("<h1>" + data.name + " (" + today + ")" + data.weather.icon + "</h1>");
+        console.log(data.weather, "weather");
+          
+           //$(".city").html("<h1>" + data.name + " (" + today + ")" + icon + "</h1>");
+          $(".city").html("<h1>" + data.name + " (" + today + ")" + "</h1>");
+          $(".icon").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");   
+         
           $(".temp").text("Temperature: " + data.main.temp + "° F");
           $(".humidity").text("Humidity: " + data.main.humidity + "%");
           $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
