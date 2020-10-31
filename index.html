@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!--next four lines for magnifying glass favicon-->
   
 
@@ -37,8 +40,8 @@
       </div>
 
     </div>
-    <div class="col-12 col-md-6">
-      <div class="current-card">
+    <div class="col-12 col-md-8">
+      <div class="current-card d-none"> <!-- d-none hides the frame on load-->
         <!-- generate current information for selected city-->
           <h2 class="subtitle">
             <span id="city-search-term"></span>
@@ -50,6 +53,10 @@
             <div class="temp"></div>
             <div class="humidity"></div>
             <div class="wind"></div>
+            <div class="uv-index-badges"></div>
+              <span class="badge badge-danger">UV Index: </span>
+              <span class="badge badge-warning">UV Index: </span>
+              <span class="badge badge-success">UV Index: </span>
           </div>
       </div>
     </div>
