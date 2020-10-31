@@ -21,11 +21,7 @@ var collectWeatherInfo = function (city) {
   //UV: "https://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
 
   var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
-  //var apiUrlUV = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=" + apiKey;
-
-
-  
-
+ 
   // make a request to the URL
   fetch(apiUrlDaily)
     // .then(function(response) {
@@ -40,37 +36,44 @@ var collectWeatherInfo = function (city) {
        console.log("latCoord", latCoord);
        console.log("lonCoord", lonCoord);
 
+       //var apiUrlUV = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=" + apiKey;
       var apiUrlUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latCoord + "&lon=" + lonCoord + "&appid=" + apiKey;
       console.log("apiurluv", apiUrlUV);
 
+      debugger;
       fetch(apiUrlUV)
         .then(response => response.json())
         .then(function(data) {
-        console.log(data.weather, "weather")  
+        
+        console.log("UV Index", data.value)  
       })
       //displayDailyWeather(data, city);
       //console.log(data);
 
       // display current day 
       var today = moment().format("M/D/YYYY");
-      var $subtitleDate = $("#currentDay");
-
-      $(".current-card").removeClass("d-none"); // shows card
-      //$(".city").html("<h1>" + data.name + " (" + today + ")" + icon + "</h1>");
+      var uvIndex = data.value;
+      
+      $(".current-card").removeClass("d-none"); // shows card after being hidden on page load
+      $(".badge").addClass("d-none"); // hide badges on page load
+      // format header of current day
       $(".city").html("<h1>" + data.name + " (" + today + ")" + "</h1>");
       $(".icon").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
 
+      // format rest of current day
       $(".temp").text("Temperature: " + Math.floor(data.main.temp) + "° F");
       $(".humidity").text("Humidity: " + data.main.humidity + "%");
       $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
-      if (apiUrlUV <= 2) {
-        $(".badge-success").text("UV Index: " + apiUrlUV);
+      console.log("UV Index", data.value)
+      debugger;
+      if (uvIndex <= 2) {
+        $(".badge-success").text("UV Index: " + uvIndex);
       } else {
-        if (apiUrlUV > 2 && apiUrlUV <= 7) {
-          $(".badge-warning").text("UV Index: " + apiUrlUV);
+        if (uvIndex > 2 && apiUrlUV <= 7) {
+          $(".badge-warning").text("UV Index: " + uvIndex);
         } else {
-          if (apiUrlUV > 7) {
-            $(".badge-danger").text("UV Index: " + apiUrlUV);
+          if (uvIndex > 7) {
+            $(".badge-danger").text("UV Index: " + uvIndex);
           }
         }
       }
