@@ -136,11 +136,11 @@ var collectWeatherInfo = function (city) {
           $("#icon5").attr("src", "http://openweathermap.org/img/w/" + data.list[38].weather[0].icon + ".png");
           
           // display and format temperature for each day
-          $("#temp1").text("Temperature: " + Math.floor(data.list[6].main.temp) + "° F");
-          $("#temp2").text("Temperature: " + Math.floor(data.list[14].main.temp) + "° F");
-          $("#temp3").text("Temperature: " + Math.floor(data.list[22].main.temp) + "° F");
-          $("#temp4").text("Temperature: " + Math.floor(data.list[30].main.temp) + "° F");
-          $("#temp5").text("Temperature: " + Math.floor(data.list[38].main.temp) + "° F");
+          $("#temp1").text("Temp: " + Math.floor(data.list[6].main.temp) + "° F");
+          $("#temp2").text("Temp: " + Math.floor(data.list[14].main.temp) + "° F");
+          $("#temp3").text("Temp: " + Math.floor(data.list[22].main.temp) + "° F");
+          $("#temp4").text("Temp: " + Math.floor(data.list[30].main.temp) + "° F");
+          $("#temp5").text("Temp: " + Math.floor(data.list[38].main.temp) + "° F");
 
           // display and format humidity for each day
           $("#hum1").text("Humidity: " + data.list[6].main.humidity + "%");
