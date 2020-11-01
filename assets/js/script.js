@@ -1,14 +1,25 @@
 var inputSearchEl = document.querySelector("#input-search");
-console.log(inputSearchEl);
+  console.log(inputSearchEl);
 var cityInputEl = document.querySelector("#city");
-console.log(cityInputEl);
+  console.log(cityInputEl);
 var cityContainerEl = document.querySelector("#city-container");
 var apiKey = "fc812994b97935be7c26648fa44398a1";
 
+var searchSubmitHandler = function (event) {
+  event.preventDefault();
+
+  if (city) {
+    collectWeatherInfo(city);
+  } else {
+    alert("Please enter a city you would like to know the weather for.");
+  }
+
+  console.log(event);
+};
 
 // // store and display recent searches in local storage
 // var $city = $(".form-input");
-// debugger;
+
 
 // $("button").on("click", function() {
 //   localStorage.setItem(".search-line"), JSON.stringify($city.val());
@@ -16,22 +27,35 @@ var apiKey = "fc812994b97935be7c26648fa44398a1";
 //   $(".form-input").val(persistCity);
 // });
 
-var collectWeatherInfo = function (city) {
+// var collectWeatherInfo = function (city) { <= don't think I need to pass in city anymore
+var collectWeatherInfo = function () {  
 
-  //Daily: format api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-  //UV: "https://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
-  
   // get value from input element
   var city = cityInputEl.value.trim();
   console.log(city);
-  var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
-  console.log(city);
 
-  // make a request to the URL
+  //Daily format: api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+  var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
+  
+  // make a request to the daily weather API
   fetch(apiUrlDaily)
     .then(response => response.json())
     .then(function (data) {
-      console.log(data.weather, "weather");
+      console.log("name", data.name);
+      console.log("weather", data.weather);
+
+      // create list-group table of cities searched for
+      var cityList = $(".list-group");
+      console.log("data.name", data.name)
+      debugger;
+      for (var i = 0; i < data.weather.length; i++) {
+        var result = data.name;
+        var listItem = $("<a class='list-group-item list-group-item-link' />");
+        listItem.text(result.name);
+        listItem.attr("href", result.index);
+        cityList.append(result);
+      }
+
 
       var latCoord = data.coord.lat;
       var lonCoord = data.coord.lon;
@@ -40,23 +64,20 @@ var collectWeatherInfo = function (city) {
 
       //var apiUrlUV = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=" + apiKey;
       var apiUrlUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latCoord + "&lon=" + lonCoord + "&appid=" + apiKey;
-     
+
       fetch(apiUrlUV)
         .then(response => response.json())
         .then(function (data) {
           console.log("UV Index", data.value)
           var uvIndex = data.value;
           if (uvIndex <= 2) {
-
             $(".badge-success").text("UV Index: " + uvIndex);
           } else {
             if (uvIndex > 2 && uvIndex <= 7) {
-
               $(".badge-warning").text("UV Index: " + uvIndex);
               $(".badge-warning").display = "block"; //show the right badge
               $(".badge-success").display = "none"; //show the right badge
               $(".badge-danger").display = "none"; //show the right badge
-
             } else {
               if (uvIndex > 7) {
                 $(".badge-danger").text("UV Index: " + uvIndex);
@@ -73,26 +94,26 @@ var collectWeatherInfo = function (city) {
       $(".current-card").removeClass("d-none"); // shows card after being hidden on page load
       $(".five-day-cards").addClass("d-none");
       $(".badge").display = "none"; // hide badges on page load
-      
+
       // format header of current day
       $(".city").html("<h1>" + data.name + " (" + today + ")" + "</h1>");
       $(".icon").attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-      
+
       // format rest of current day
       $(".temp").text("Temperature: " + Math.floor(data.main.temp) + "° F");
       $(".humidity").text("Humidity: " + data.main.humidity + "%");
       $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
       console.log("UV Index", data.value)
-      
+
       // api.openweathermap.org / data / 2.5 / forecast ? q = { city name } & appid={ API key }
       var api5Day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + apiKey;
-        
+
       // fetch for 5 day forecast
       fetch(api5Day)
         .then(response => response.json())
         .then(function (data) {
           console.log(data);
-                  
+
           // set variables for reading dates in 5 day forecast
           var forecastDay1 = data.list[6].dt_txt;
           console.log("forecastDay1", forecastDay1, typeof forecastDay1);
@@ -103,7 +124,7 @@ var collectWeatherInfo = function (city) {
           console.log("forecastDay2", forecastDay2, typeof forecastDay2);
           var responseDay2 = moment(forecastDay2).format("M/D/YYYY")
           console.log("responseDay2", responseDay2, typeof responseDay2);
-          
+
           var forecastDay3 = data.list[22].dt_txt;
           console.log("forecastDay3", forecastDay3, typeof forecastDay3);
           var responseDay3 = moment(forecastDay3).format("M/D/YYYY")
@@ -118,8 +139,7 @@ var collectWeatherInfo = function (city) {
           console.log("forecastDay5", forecastDay5, typeof forecastDay5);
           var responseDay5 = moment(forecastDay5).format("M/D/YYYY")
           console.log("responseDay5", responseDay5, typeof responseDay5);
-          
-          
+
           $(".five-day-cards").removeClass("d-none"); // shows card after being hidden on page load
           // display header date of 5 day forcast cards
           $("#date1").text(responseDay1);
@@ -134,7 +154,7 @@ var collectWeatherInfo = function (city) {
           $("#icon3").attr("src", "http://openweathermap.org/img/w/" + data.list[22].weather[0].icon + ".png");
           $("#icon4").attr("src", "http://openweathermap.org/img/w/" + data.list[30].weather[0].icon + ".png");
           $("#icon5").attr("src", "http://openweathermap.org/img/w/" + data.list[38].weather[0].icon + ".png");
-          
+
           // display and format temperature for each day
           $("#temp1").text("Temp: " + Math.floor(data.list[6].main.temp) + "° F");
           $("#temp2").text("Temp: " + Math.floor(data.list[14].main.temp) + "° F");
@@ -150,40 +170,27 @@ var collectWeatherInfo = function (city) {
           $("#hum5").text("Humidity: " + data.list[38].main.humidity + "%");
         })
 
-      // .catch(function (error) {
-      //   // if you try to search for a city that doesn't exist
-      //   alert("Error: " + response.statusText);
-      // })
+        .catch(function (error) {
+          // if you try to search for a city that doesn't exist
+          alert("Error: " + response.statusText);
+        });
     });
-
-  };
-  var searchSubmitHandler = function (event) {
-    event.preventDefault();
+};
 
 
 
-    if (city) {
-      collectWeatherInfo(city);
-      debugger;
-    } else {
-      alert("Please enter a city you would like to know the weather for.");
-    }
+// var displayDailyWeather = function (cities) { <= not being used and not sure it works
+//   // loop over cities
+//   for (var i = 0; i < cities.length; i++) {
+//     // create a row for each city
+//     var cityEl = document.createElement("a");
+//     cityEl.classList = "list-item flex-row justify-space-between align-left";
 
-    console.log(event);
-  };
-
-  var displayDailyWeather = function (cities) {
-    // loop over cities
-    for (var i = 0; i < cities.length; i++) {
-      // create a row for each city
-      var cityEl = document.createElement("a");
-      cityEl.classList = "list-item flex-row justify-space-between align-left";
-
-      // append to the list
-      cityContainerEl.appendChild(cityEl);
-    }
-  };
+//     // append to the list
+//     cityContainerEl.appendChild(cityEl);
+//   }
+// };
 
 
-  inputSearchEl.addEventListener("submit", searchSubmitHandler); //--commenting because of onclick
+inputSearchEl.addEventListener("submit", searchSubmitHandler); //--commenting because of onclick
 
