@@ -43,17 +43,34 @@ var collectWeatherInfo = function () {
     .then(function (data) {
       console.log("name", data.name);
       console.log("weather", data.weather);
+      renderList(data);
 
       // create list-group table of cities searched for
-      var cityList = $(".list-group");
-      console.log("data.name", data.name)
-      debugger;
-      for (var i = 0; i < data.weather.length; i++) {
-        var result = data.name;
-        var listItem = $("<a class='list-group-item list-group-item-link' />");
-        listItem.text(result.name);
-        listItem.attr("href", result.index);
-        cityList.append(result);
+      function renderList(data) {
+        var cityList = $(".list-group");
+        console.log("data.name", data.name)
+        debugger;
+        for (var i = 0; i < data.weather.length; i++) {
+          var result = data.name;
+          console.log("**result", result)
+          var listItem = $("<a class='list-group-item list-group-item-action' />");
+          listItem.text(result.name);
+          listItem.attr("href", result.index);
+          cityList.append(result);
+        }
+
+        $(".list-group-item").on("click", clickList);
+        localStorage.setItem("City1", result);
+        var persist1 = localStorage.getItem("City1");
+          $(".list-group").val(persist1);
+      }  
+
+      function clickList(event) {
+        event.preventDefault();
+        $(".list-group-item").removeClass("active");
+
+        var item = $(this);
+        item.addClass("active");
       }
 
 
@@ -103,8 +120,7 @@ var collectWeatherInfo = function () {
       $(".temp").text("Temperature: " + Math.floor(data.main.temp) + "° F");
       $(".humidity").text("Humidity: " + data.main.humidity + "%");
       $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
-      console.log("UV Index", data.value)
-
+      
       // api.openweathermap.org / data / 2.5 / forecast ? q = { city name } & appid={ API key }
       var api5Day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + apiKey;
 
