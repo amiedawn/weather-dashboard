@@ -61,9 +61,8 @@ var collectWeatherInfo = function () {
 
         $(".list-group-item").on("click", clickList);
         localStorage.setItem("City1", result);
-        var persist1 = localStorage.getItem("City1");
-          $(".list-group").val(persist1);
-      }  
+        
+      }
 
       function clickList(event) {
         event.preventDefault();
@@ -72,7 +71,6 @@ var collectWeatherInfo = function () {
         var item = $(this);
         item.addClass("active");
       }
-
 
       var latCoord = data.coord.lat;
       var lonCoord = data.coord.lon;
@@ -89,21 +87,25 @@ var collectWeatherInfo = function () {
           var uvIndex = data.value;
           if (uvIndex <= 2) {
             $(".badge-success").text("UV Index: " + uvIndex);
+            $(".badge-warning").hide(); //show the right badge
+            $(".badge-success").show(); //show the right badge
+            $(".badge-danger").hide(); //show the right badge
           } else {
             if (uvIndex > 2 && uvIndex <= 7) {
               $(".badge-warning").text("UV Index: " + uvIndex);
-              $(".badge-warning").display = "block"; //show the right badge
-              $(".badge-success").display = "none"; //show the right badge
-              $(".badge-danger").display = "none"; //show the right badge
+              $(".badge-warning").show(); //show the right badge
+              $(".badge-success").hide(); //show the right badge
+              $(".badge-danger").hide(); //show the right badge
             } else {
               if (uvIndex > 7) {
                 $(".badge-danger").text("UV Index: " + uvIndex);
+                $(".badge-warning").hide(); //show the right badge
+                $(".badge-success").hide(); //show the right badge
+                $(".badge-danger").show(); //show the right badge
               }
             }
           }
         })
-      //displayDailyWeather(data, city);
-      //console.log(data);
 
       // display current day 
       var today = moment().format("M/D/YYYY");
@@ -190,22 +192,19 @@ var collectWeatherInfo = function () {
           // if you try to search for a city that doesn't exist
           alert("Error: " + response.statusText);
         });
+      retrieveDisplayStorage();
     });
+  
+  
 };
 
+var retrieveDisplayStorage = function() {
+  var persist1 = JSON.parse(localStorage.getItem("City1"));
+  $(".list-group").val(persist1);
+  console.log("city from storage", persist1);
+  console.log("city from list-group", $(".list-group").val(persist1));
+};
 
-
-// var displayDailyWeather = function (cities) { <= not being used and not sure it works
-//   // loop over cities
-//   for (var i = 0; i < cities.length; i++) {
-//     // create a row for each city
-//     var cityEl = document.createElement("a");
-//     cityEl.classList = "list-item flex-row justify-space-between align-left";
-
-//     // append to the list
-//     cityContainerEl.appendChild(cityEl);
-//   }
-// };
 
 
 inputSearchEl.addEventListener("submit", searchSubmitHandler); //--commenting because of onclick

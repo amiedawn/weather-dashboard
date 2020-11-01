@@ -91,3 +91,7 @@ img {
   color: black;
   border-style: solid;
 }
+
+.badge {
+  font-size: 15px;
+}
