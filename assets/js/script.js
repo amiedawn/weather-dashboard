@@ -1,7 +1,9 @@
 var inputSearchEl = document.querySelector("#input-search");
-  console.log(inputSearchEl);
+console.log(inputSearchEl);
+
 var cityInputEl = document.querySelector("#city");
-  console.log(cityInputEl);
+console.log(cityInputEl);
+
 var cityContainerEl = document.querySelector("#city-container");
 var apiKey = "fc812994b97935be7c26648fa44398a1";
 
@@ -16,16 +18,6 @@ var searchSubmitHandler = function (event) {
 
   console.log(event);
 };
-
-// // store and display recent searches in local storage
-// var $city = $(".form-input");
-
-
-// $("button").on("click", function() {
-//   localStorage.setItem(".search-line"), JSON.stringify($city.val());
-//   var persistCity  = JSON.parse(localStorage.getItem("search-line"));
-//   $(".form-input").val(persistCity);
-// });
 
 // var collectWeatherInfo = function (city) { <= don't think I need to pass in city anymore
 var collectWeatherInfo = function () {  
@@ -61,7 +53,6 @@ var collectWeatherInfo = function () {
 
         $(".list-group-item").on("click", clickList);
         localStorage.setItem("City1", result);
-        
       }
 
       function clickList(event) {
@@ -199,13 +190,14 @@ var collectWeatherInfo = function () {
 };
 
 var retrieveDisplayStorage = function() {
-  var persist1 = JSON.parse(localStorage.getItem("City1"));
-  $(".list-group").val(persist1);
+  var persist1 = localStorage.getItem("City1");
+  $(".list-group").append(`<a href="#" class="list-group-item list-group-item-action">${persist1}</a>`);
+ // $(".list-group").append(`<a href="#" class="list-group-item list-group-item-action">${persist1}</a>`);
   console.log("city from storage", persist1);
   console.log("city from list-group", $(".list-group").val(persist1));
 };
 
-
+retrieveDisplayStorage();
 
 inputSearchEl.addEventListener("submit", searchSubmitHandler); //--commenting because of onclick
 
