@@ -83,3 +83,11 @@ img {
   height: 100px;
   width: 100px;
 }
+
+.card-group {
+  display: inline-flex;
+  margin: 15px;
+  background-color: #fffdd0;
+  color: black;
+  border-style: solid;
+}
