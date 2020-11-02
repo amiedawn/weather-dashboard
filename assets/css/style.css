@@ -71,6 +71,7 @@ main {
   border: solid;
   padding: 20px;
   border-color: #65187a;
+  border-width: 10px;
 }
 .current-info { /*temp, humidity, wind, etc*/
   font-size: 15px;
