@@ -36,6 +36,10 @@ main {
   
 }
 
+.card-group {
+  padding-top: 40px;
+
+}
 
 
 .btn {
@@ -91,6 +95,11 @@ img {
   background-color: #fffdd0;
   color: black;
   border-style: solid;
+}
+
+.forecast-card {
+  justify-content: space-around;
+  display: flex;
 }
 
 .badge {

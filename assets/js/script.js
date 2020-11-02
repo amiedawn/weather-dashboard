@@ -40,38 +40,7 @@ var collectWeatherInfo = function () {
       console.log("weather", data.weather);
       displaySearchHistory();
 
-
-
-
-
-
-
-
-
-      // create list-group table of cities searched for
-      // function renderList(data) {
-      //   var cityList = $(".list-group");
-      //   console.log("data.name", data.name)
-      //   debugger;
-      //   for (var i = 0; i < data.weather.length; i++) {
-      //     var result = data.name;
-      //     console.log("**result", result)
-      //     var listItem = $("<a class='list-group-item list-group-item-action' />");
-      //     listItem.text(result.name);
-      //     listItem.attr("href", result.index);
-      //  //   cityList.append(result);
-      //   }
-
-      //  $(".list-group-item").on("click", clickList);
-      //localStorage.setItem("City1", JSON.stringify(result));
-      //  }
-
-
-
-
-
-
-
+      // start working on UV Index fetch
       var latCoord = data.coord.lat;
       var lonCoord = data.coord.lon;
       console.log("latCoord", latCoord);
@@ -123,10 +92,10 @@ var collectWeatherInfo = function () {
       $(".humidity").text("Humidity: " + data.main.humidity + "%");
       $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
 
-      // api.openweathermap.org / data / 2.5 / forecast ? q = { city name } & appid={ API key }
+      // 5-day api: api.openweathermap.org/data/2.5/forecast?q={ city name } & appid= { API key }
       var api5Day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + apiKey;
 
-      // fetch for 5 day forecast
+      // fetch for 5-day forecast
       fetch(api5Day)
         .then(response => response.json())
         .then(function (data) {
@@ -159,7 +128,7 @@ var collectWeatherInfo = function () {
           console.log("responseDay5", responseDay5, typeof responseDay5);
 
           $(".five-day-cards").removeClass("d-none"); // shows card after being hidden on page load
-          // display header date of 5 day forcast cards
+          // display header date of 5 day forecast cards
           $("#date1").text(responseDay1);
           $("#date2").text(responseDay2);
           $("#date3").text(responseDay3);
@@ -192,41 +161,21 @@ var collectWeatherInfo = function () {
           // if you try to search for a city that doesn't exist
           alert("Error: " + response.statusText);
         });
-      retrieveDisplayStorage();
     });
 };
 
 
 function displaySearchHistory() {
   $("#search-history").empty();
-  for (var i=0; i < persist1.length; i++) {
+  for (var i = 0; i < persist1.length; i++) {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
-    listItem.on("click", function() {
+    listItem.on("click", function () {
       console.log(persist1[i]);
       collectWeatherInfo(persist1[i]); //not sure if this is too much
     })
     $("#search-history").append(listItem);
   }
 };
-
-// create list-group table of cities searched for
-//function renderList(data) {
-// var cityList = $(".list-group");
-//   console.log("data.name", data.name)
-//   debugger;
-//   for (var i = 0; i < data.weather.length; i++) {
-//     var result = data.name;
-//     console.log("**result", result)
-//     var listItem = $("<a class='list-group-item list-group-item-action' />");
-//     listItem.text(result.name);
-//     listItem.attr("href", result.index);
-//     //   cityList.append(result);
-//   }
-
-//  $(".list-group-item").on("click", clickList);
-//  localStorage.setItem("City1", JSON.stringify(data.name));
-
-//};
 
 function clickList(event) {
   event.preventDefault();
@@ -236,35 +185,10 @@ function clickList(event) {
   item.addClass("active");
 };
 
-var newCity = "";
-var retrieveDisplayStorage = function () { // <= works for list
-  debugger;
-
-  //   var persist1 = JSON.parse(localStorage.getItem("City1")) || [] || [""];
-  //   console.log("persist1", persist1);
-  //   if (persist1 !== []) {
-  //     persist1.push(newCity);
-  //     collectWeatherInfo();
-  //   } else {
-  //     collectWeatherInfo();
-  // };
-
-  // console.log("persist1", persist1);
-  // localStorage.setItem("City1", JSON.stringify(persist1));
-  //localStorage.setItem("City1", JSON.stringify(data.name));
-  var persist1 = JSON.parse(localStorage.getItem("City1"));
-  // var cityArr = JSON.parseInt(persist1);
-  //   for (var i = 0; i < cityArr.length; i++) {
-  //     $(".list-group").append(`<a href="#" class="list-group-item list-group-item-action">${persist1}</a>`);
-  //     // $(".list-group").append(<a href="#" class="list-group-item list-group-item-action"> + $(persist1) + "</a>");
-  //     console.log("city from storage", persist1);
-  //     console.log("city from list-group", $(".list-group").val(persist1));
-  //   }
-};
-
 displaySearchHistory();
-retrieveDisplayStorage();
+if (persist1[0]) {
+  collectWeatherInfo(persist1[0]);
+}
 
-
+// set city to kickoff weather search determined by city entered
 inputSearchEl.addEventListener("submit", searchSubmitHandler);
-
