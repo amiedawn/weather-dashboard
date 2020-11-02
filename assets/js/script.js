@@ -9,6 +9,7 @@ var apiKey = "fc812994b97935be7c26648fa44398a1";
 
 var persist1 = JSON.parse(localStorage.getItem("persist1")) || [];
 
+
 var searchSubmitHandler = function (event) {
   event.preventDefault();
 
@@ -167,14 +168,18 @@ var collectWeatherInfo = function () {
 
 function displaySearchHistory() {
   $("#search-history").empty();
+  debugger;
   for (var i = 0; i < persist1.length; i++) {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
-    listItem.on("click", function () {
-      console.log(persist1[i]);
-      collectWeatherInfo(persist1[i]); 
-    })
     $("#search-history").append(listItem);
+    listItem.addClass("active");
   }
+  console.log("persist1", persist1[i])
+  persist1.on("click", function () {
+    collectWeatherInfo(persist1[i]);
+    $(".list-group-item").removeClass("active");
+  })
+  
 };
 
 displaySearchHistory();
@@ -184,3 +189,4 @@ if (persist1[0]) {
 
 // set city to kickoff weather search determined by city entered
 inputSearchEl.addEventListener("submit", searchSubmitHandler);
+//document.getElementById("search-history").addEventListener("click", collectWeatherInfo);
