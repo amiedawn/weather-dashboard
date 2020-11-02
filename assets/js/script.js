@@ -171,18 +171,10 @@ function displaySearchHistory() {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
     listItem.on("click", function () {
       console.log(persist1[i]);
-      collectWeatherInfo(persist1[i]); //not sure if this is too much
+      collectWeatherInfo(persist1[i]); 
     })
     $("#search-history").append(listItem);
   }
-};
-
-function clickList(event) {
-  event.preventDefault();
-  $(".list-group-item").removeClass("active");
-
-  var item = $(this);
-  item.addClass("active");
 };
 
 displaySearchHistory();
