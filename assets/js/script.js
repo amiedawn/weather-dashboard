@@ -175,7 +175,7 @@ function displaySearchHistory() {
     listItem.addClass("active");
   }
   console.log("persist1", persist1[i])
-  persist1.on("click", function () {
+  listItem.on("click", function () {
     collectWeatherInfo(persist1[i]);
     $(".list-group-item").removeClass("active");
   })
