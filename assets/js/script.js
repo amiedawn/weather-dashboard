@@ -13,6 +13,12 @@ var persist1 = JSON.parse(localStorage.getItem("persist1")) || [];
 var searchSubmitHandler = function (event) {
   event.preventDefault();
 
+  // get value from input element
+ debugger;
+
+  var city = cityInputEl.value.trim();
+  console.log(city);
+
   if (city) {
     collectWeatherInfo(city);
   } else {
@@ -21,10 +27,10 @@ var searchSubmitHandler = function (event) {
   console.log(event);
 };
 
-var collectWeatherInfo = function () {
-  // get value from input element
-  var city = cityInputEl.value.trim();
-  console.log(city);
+var collectWeatherInfo = function (city) {
+  // get value from input element <== moved these three lines to searchSubmitHandler
+ // var city = cityInputEl.value.trim();
+ // console.log(city);
 
   //Daily format: api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
   var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
@@ -81,7 +87,7 @@ var collectWeatherInfo = function () {
       var today = moment().format("M/D/YYYY");
 
       $(".current-card").removeClass("d-none"); // shows card after being hidden on page load
-      $(".five-day-cards").addClass("d-none");
+      $(".card-group").addClass("d-none");
       $(".badge").display = "none"; // hide badges on page load
 
       // format header of current day
@@ -128,7 +134,8 @@ var collectWeatherInfo = function () {
           var responseDay5 = moment(forecastDay5).format("M/D/YYYY")
           console.log("responseDay5", responseDay5, typeof responseDay5);
 
-          $(".five-day-cards").removeClass("d-none"); // shows card after being hidden on page load
+          $(".card-group").removeClass("d-none"); // shows card title after being hidden on page load
+          $(".five-day-cards").removeClass("d-none"); // shows cards after being hidden on page load
           // display header date of 5 day forecast cards
           $("#date1").text(responseDay1);
           $("#date2").text(responseDay2);
@@ -169,19 +176,23 @@ var collectWeatherInfo = function () {
 function displaySearchHistory() {
   $("#search-history").empty();
   debugger;
+  
   for (var i = 0; i < persist1.length; i++) {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
-    $("#search-history").append(listItem);
+     $("#search-history").append(listItem);
     listItem.addClass("active");
     console.log("persist1", persist1[i]);
-   
-    $(this).on("click", function () {
+  }
+    //$(this).on("click", function () {
+  $(" li-class").on("click", "li", function() {
       console.log("this", this);
+      
       collectWeatherInfo(persist1[i]);
-      $(".list-group-item").removeClass("active");
+    //  $(".list-group-item").removeClass("active");
+    (".list-group-item").removeClass("active");
     })
 
-  }
+  
 };
   displaySearchHistory();
   if (persist1[0]) {
