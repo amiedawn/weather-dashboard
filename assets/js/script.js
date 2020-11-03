@@ -173,20 +173,21 @@ function displaySearchHistory() {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
     $("#search-history").append(listItem);
     listItem.addClass("active");
+    console.log("persist1", persist1[i]);
+   
+    $(this).on("click", function () {
+      console.log("this", this);
+      collectWeatherInfo(persist1[i]);
+      $(".list-group-item").removeClass("active");
+    })
+
   }
-  console.log("persist1", persist1[i])
-  listItem.on("click", function () {
-    collectWeatherInfo(persist1[i]);
-    $(".list-group-item").removeClass("active");
-  })
-  
 };
+  displaySearchHistory();
+  if (persist1[0]) {
+    collectWeatherInfo(persist1[0]);
+  }
 
-displaySearchHistory();
-if (persist1[0]) {
-  collectWeatherInfo(persist1[0]);
-}
-
-// set city to kickoff weather search determined by city entered
-inputSearchEl.addEventListener("submit", searchSubmitHandler);
+  // set city to kickoff weather search determined by city entered
+  inputSearchEl.addEventListener("submit", searchSubmitHandler);
 //document.getElementById("search-history").addEventListener("click", collectWeatherInfo);
