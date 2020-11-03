@@ -5,7 +5,9 @@ var cityInputEl = document.querySelector("#city");
 console.log(cityInputEl);
 
 var cityContainerEl = document.querySelector("#city-container");
-var apiKey = "fc812994b97935be7c26648fa44398a1";
+//var apiKey = "fc812994b97935be7c26648fa44398a1";
+var apiKey = "975f21cfd36254818b964487770790a3";
+
 
 var persist1 = JSON.parse(localStorage.getItem("persist1")) || [];
 
@@ -178,17 +180,17 @@ function displaySearchHistory() {
     var listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
      $("#search-history").append(listItem);
     listItem.addClass("active");
-    console.log("persist1", persist1[i]);
-  }
-    //$(this).on("click", function () {
-  $(" li-class").on("click", "li", function() {
-      console.log("this", this);
-      
-      collectWeatherInfo(persist1[i]);
+        
+  //$(" li-class").on("click", "li", function() {
+    //listItem.addEventListener("click", function() {
+      $(listItem).on("click", function() {
+    //listItem.click(function() {
+    collectWeatherInfo(persist1[i]);
     //  $(".list-group-item").removeClass("active");
-    (".list-group-item").removeClass("active");
+    //(".list-group-item").removeClass("active");
+        (listItem).removeClass("active");
     })
-  
+  }
 };
   displaySearchHistory();
   if (persist1[0]) {
@@ -198,4 +200,5 @@ function displaySearchHistory() {
   // set city to kickoff weather search determined by city entered
   inputSearchEl.addEventListener("submit", searchSubmitHandler);
 
-  document.getElementById("search-history").addEventListener("click", (collectWeatherInfo(persist1[i])));
+  
+//document.getElementById("search-history").addEventListener("click", (collectWeatherInfo(persist1)));
