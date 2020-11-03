@@ -32,7 +32,6 @@ var collectWeatherInfo = function (city) {
  // var city = cityInputEl.value.trim();
  // console.log(city);
 
-  //Daily format: api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
   var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
 
   // make a request to the daily weather API
@@ -53,7 +52,6 @@ var collectWeatherInfo = function (city) {
       console.log("latCoord", latCoord);
       console.log("lonCoord", lonCoord);
 
-      //var apiUrlUV = "http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid=" + apiKey;
       var apiUrlUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latCoord + "&lon=" + lonCoord + "&appid=" + apiKey;
 
       fetch(apiUrlUV)
@@ -99,7 +97,6 @@ var collectWeatherInfo = function (city) {
       $(".humidity").text("Humidity: " + data.main.humidity + "%");
       $(".wind").text("Wind Speed: " + data.wind.speed + " MPH");
 
-      // 5-day api: api.openweathermap.org/data/2.5/forecast?q={ city name } & appid= { API key }
       var api5Day = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&appid=" + apiKey;
 
       // fetch for 5-day forecast
@@ -191,7 +188,6 @@ function displaySearchHistory() {
     //  $(".list-group-item").removeClass("active");
     (".list-group-item").removeClass("active");
     })
-
   
 };
   displaySearchHistory();
@@ -201,4 +197,5 @@ function displaySearchHistory() {
 
   // set city to kickoff weather search determined by city entered
   inputSearchEl.addEventListener("submit", searchSubmitHandler);
-//document.getElementById("search-history").addEventListener("click", collectWeatherInfo);
+
+  document.getElementById("search-history").addEventListener("click", (collectWeatherInfo(persist1[i])));
