@@ -17,7 +17,7 @@ This application is a weather dashboard with form inputs:
 * Moment.js
 
 ## Website
-https://github.com/amiedawn/weather-dashboard
+https://amiedawn.github.io/weather-dashboard/
 
 ## Screenshot
 ![Screenshot](/assets/images/screenshot.png)
