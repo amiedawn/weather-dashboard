@@ -11,14 +11,13 @@ body {
   font-family: sans-serif;
   color: black;
   line-height: 1.5em;
-  /*font-size: 16px; */
 }
 
 .jumbotron {
   display: flex-block;
   position: relative;
   text-align: center;
-  background-color: #65187a;
+  background-color: #FFFFB7;
   padding: 20px;
 }
 
@@ -28,17 +27,18 @@ main {
 }
 
 .card {
-  background-color: #7851a9;
+  background-color: rgb(33, 145, 131);
+  border: solid;
+  border-color: black;
+  border-width: 2px;
 }
 
 .card-header {
   padding: 0; /* keep border around "search for a city" small */
-  
 }
 
 .card-group {
   padding-top: 40px;
-
 }
 
 
@@ -49,22 +49,18 @@ main {
   line-height: 1.5em;
   font-size: 14px;
   color: black;
-  
 }
 
- .search-line {
+.search-line {
   display: inline;
   text-align: center;
-  height: 1.5em; /*supposed to be same as hieght of the button to make text vertically centered*/
-
-
-} 
+  height: 1.5em; /*supposed to be same as height of the button to make text vertically centered*/
+}
 
 .form-input {
   display: inline;
   text-align: left;
   width: 60%;
-  
 }
 
 .flex-row {
@@ -74,8 +70,9 @@ main {
 .current-card {
   border: solid;
   padding: 20px;
-  border-color: #65187a;
-  border-width: 10px;
+  border-color: black;
+  border-width: 3px;
+  background-color: #fffdd0;
 }
 .current-info { /*temp, humidity, wind, etc*/
   font-size: 15px;
