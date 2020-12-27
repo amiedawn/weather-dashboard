@@ -140,10 +140,16 @@ var apiUrlDaily = "https://api.openweathermap.org/data/2.5/weather?q=" + city + 
 function displaySearchHistory() {
   $("#search-history").empty();
   
-  for (var i = 0; i < persist1.length; i++) {
+  //remove duplicates in search history
+  if (persist1 === null) {
+    return;
+  }
+  let unique_cities = [...new Set(persist1)];
+  for (var i = 0; i < unique_cities.length; i++) {
+    let cityName = unique_cities[i];
     // let instead of var allows to the city clicked, not just the latest one
     let listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
-     $("#search-history").append(listItem);
+    $("#search-history").append(listItem);
     listItem.addClass("active");
     
     // allows click for list
@@ -152,6 +158,23 @@ function displaySearchHistory() {
     })
   }
 };
+
+// function displaySearchHistory() {
+//   $("#search-history").empty();
+  
+//   for (var i = 0; i < persist1.length; i++) {
+//     // let instead of var allows to the city clicked, not just the latest one
+//     let listItem = $('<li class="list-group-item">' + persist1[i] + "</li>");
+//     $("#search-history").append(listItem);
+//     listItem.addClass("active");
+    
+//     // allows click for list
+//     $(listItem).on("click", function() {
+//     collectWeatherInfo(listItem.text());
+//     })
+//   }
+// };
+
   displaySearchHistory();
   if (persist1[0]) {
     collectWeatherInfo(persist1[0]);
